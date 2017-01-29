@@ -6,10 +6,17 @@ import java.util.Hashtable;
 import java.util.Random;
 import java.util.Vector;
 
+import org.jfugue.player.Player;
+import org.jfugue.theory.Chord;
+import org.jfugue.theory.ChordProgression;
+import org.jfugue.theory.Note;
+
 
 public class Main {
+
+	
 	// Hashmap
-		public static Hashtable<String, Vector<String>> markovChain = new Hashtable<String, Vector<String>>();
+			public static Hashtable<String, Vector<String>> markovChain = new Hashtable<String, Vector<String>>();
 		static Random rnd = new Random();
 		
 		
@@ -17,7 +24,8 @@ public class Main {
 		 * Main constructor
 		 */
 		public static void main(String[] args) throws IOException {
-			
+		
+			Create();
 			// Create the first two entries (k:_start, k:_end)
 			markovChain.put("_start", new Vector<String>());
 			markovChain.put("_end", new Vector<String>());
@@ -26,7 +34,7 @@ public class Main {
 			// Get some words 
 			System.out.print("Enter your phrase > ");
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			String sInput = in.readLine() + ".";
+			String sInput = in.readLine();
 			
 			// Add the words to the hash table
 			addWords(sInput);
@@ -107,4 +115,28 @@ public class Main {
 			
 			System.out.println("New phrase: " + newPhrase.toString());	
 		}
+
+		 static void Create(){
+			
+			 ChordProgression cp = new ChordProgression("I IV V");
+			 Chord[] chords = cp.setKey("C").getChords();{
+			    
+			    for (Chord chord : chords) {
+			      System.out.print("Chord "+chord+" has these notes: ");
+			      Note[] notes = chord.getNotes();
+			      for (Note note : notes) {
+			        System.out.print(note+" ");
+			      }
+			      System.out.println();
+			    }
+
+			  //  Player player = new Player();
+			  //  player.play(cp);
+			  }
+		}
+
+
+
+
+
 }
